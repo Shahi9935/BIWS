@@ -15,11 +15,33 @@
 </head>
 <body>
     <div class="container">
-
-        <div class="row mt-4">
+        <div class="row mt-4 text-center">
+            <div>
+                <select name="topicSelect" id="topicSelect">
+                    <option value="ALL">ALL</option>
+                    <option value="Accounting">Accounting</option>
+                    <option value="EV">EV</option>
+                    <option value="Valuation">Valuation</option>
+                    <option value="DCF">DCF</option>
+                    <option value="Merger">Merger</option>
+                    <option value="LBO">LBO</option>
+                </select>
+                <select name="difficultySelect" id="difficultySelect">
+                    <option value="ALL">ALL</option>
+                    <option value="BASIC">BASIC</option>
+                    <option value="ADVANCED">ADVANCED</option>
+                </select>
+                <button id="changeSubmit" onclick="changeSubmit()">Change</button>
+            </div>
+        </div>
+        <div class="row text-center mt-3 row" style="color: grey;" >
+            <div class="" style="display: flex; justify-content: center;"><p id="currentCount"></p><p>/</p><p id="totalCount"></p></div>
+        </div>
+        <div class="row mt-1">
             <div class="mt-5 col-12 text-center">
                 <h3 id="question"></h2>
                 <p class="text-border" id="topic"></p>
+                <p class="text-border" id="difficulty">BASIC</p>
             </div>
         </div>
         <div class="row justify-content-center align-items-center mt-3">
@@ -34,6 +56,7 @@
         </div>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="index2.js"></script>
