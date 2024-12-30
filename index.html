@@ -16,8 +16,9 @@
 <body>
     <div class="container">
         <div class="row mt-4 text-center">
-            <div>
-                <select name="topicSelect" id="topicSelect">
+                <div class="col-4"></div>
+                <div class="col-2">
+                <select class="form-select" name="topicSelect" id="topicSelect">
                     <option value="ALL">ALL</option>
                     <option value="Accounting">Accounting</option>
                     <option value="EV">EV</option>
@@ -26,13 +27,18 @@
                     <option value="Merger">Merger</option>
                     <option value="LBO">LBO</option>
                 </select>
-                <select name="difficultySelect" id="difficultySelect">
+                </div>
+                <div class="col-2">
+                <select class="form-select" name="difficultySelect" id="difficultySelect">
                     <option value="ALL">ALL</option>
                     <option value="BASIC" selected="selected">BASIC</option>
                     <option value="ADVANCED">ADVANCED</option>
                 </select>
-                <button id="changeSubmit" onclick="changeSubmit()">Change</button>
-            </div>
+                </div>
+                <div class="col-1">
+                <button class="btn btn-success" id="changeSubmit" onclick="changeSubmit()">Change</button>
+                </div>
+                <div class="col-3"></div>
         </div>
         <div class="row text-center mt-3 row" style="color: grey;" >
             <div class="" style="display: flex; justify-content: center;"><p id="currentCount"></p><p>/</p><p id="totalCount"></p></div>
