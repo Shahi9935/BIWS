@@ -79,6 +79,11 @@ function hideAnswer(){
   hideEle.style.display = 'none';
 }
 
+function previousQuestion(){
+  counter--;
+  setQuestion(counter);
+}
+
 function nextQuestion(){
   counter++;
   setQuestion(counter);
