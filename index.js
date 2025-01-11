@@ -14,6 +14,7 @@ function shuffleArray(array) {
 
 function csvToJson2(csv) {
     const lines = csv.trim().split('\"\"\n');
+    index = 0;
     lines.forEach(arr => {
       const values = arr.split('@');
       var type = values[0]
@@ -21,6 +22,7 @@ function csvToJson2(csv) {
       var question = values[2]
       var answer = values[3]
       var obj = {}
+      obj['id'] = index
       obj['question'] = question
       obj['answer'] = answer
       obj['topic'] = topic
@@ -33,6 +35,7 @@ function csvToJson2(csv) {
         console.log(obj);
       }
       all.push(obj);
+      index++;
     });
   }
 
@@ -41,14 +44,17 @@ function setQuestion(index) {
   const qEle = document.getElementById('question');
   const aEle = document.getElementById('answer');
   const dEle = document.getElementById('difficulty');
+  const questionIdEle = document.getElementById('questionId');
   const showEle = document.getElementById('show-answer');
   const hideEle = document.getElementById('hide-answer');
+  const flaggedEle = document.getElementById("flagged");
   aEle.style.display = 'none';
   var arr = myarr;
   tEle.textContent = arr[index]['topic'];
   qEle.textContent = arr[index]['question'].slice(3,-3);
   aEle.textContent = arr[index]['answer'].slice(3,-1);
   dEle.textContent = arr[index]['type'];
+  questionIdEle.textContent = arr[index]['id'];
   if (arr[index]['type'] == 'BASIC'){
     dEle.style.border="1px solid green";
     dEle.style.color="green";
@@ -59,6 +65,12 @@ function setQuestion(index) {
   showEle.style.display = 'block';
   hideEle.style.display = 'none';
   document.getElementById('currentCount').textContent = index + 1;
+  var flaggedQuestions = getCookie();
+  if (flaggedQuestions.includes(arr[index]['id'])){
+    flaggedEle.innerHTML = `<i class="fas fa-flag fa-lg" ></i>`;  
+  } else{
+    flaggedEle.innerHTML = `<i class="far fa-flag fa-lg" ></i>`;  
+  }
 }
 
 function showAnswer(){
@@ -140,3 +152,52 @@ function changeSubmit(){
 
 const jsonData = csvToJson2(csvData);
 changeSubmit();
+
+function navigateToFlagged() {
+  // Replace 'target.html' with your desired HTML file
+  window.location.href = 'flagged.html';
+}
+
+function flagForLater(){
+  const element = document.getElementById("questionId");
+  if (element) {
+    const htmlContent = element.innerHTML;
+    const num = parseInt(htmlContent, 10);
+    updateCookies(num);
+    logCookies();
+} else {
+    console.log("Element not found!");
+}
+}
+
+function updateCookies(num) {
+  const array = getCookie();
+
+  const index = array.indexOf(num);
+  if (index === -1) {
+      array.push(num);
+      const element = document.getElementById("flagged");
+      element.innerHTML = `<i class="fas fa-flag fa-lg" ></i>`;
+  } else {
+      array.splice(index, 1);
+      const element = document.getElementById("flagged");
+      element.innerHTML = `<i class="far fa-flag fa-lg" ></i>`;
+  }
+  setCookie(array);
+}
+
+function setCookie(value) {
+  localStorage.setItem("flaggedQuestions", JSON.stringify(value));
+}
+
+function getCookie() {
+  var array = localStorage.getItem("flaggedQuestions");
+  if(array == null)
+    return [];
+  return JSON.parse(array);
+}
+
+function logCookies(){
+  var array = localStorage.getItem("flaggedQuestions");
+  console.log('Current Array:', array);
+}
